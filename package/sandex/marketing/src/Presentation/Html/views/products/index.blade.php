@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container">
+    <div class="row justify-content-end">
+        <div class="col-md-8 py-2">
+        <span class="h3"> Products </span>
+        </div>
+        <div class="col-md-4 px-3 py-2">
+<a href="/products/create" class="btn btn-sm btn-primary">New</a>
+        </div>
+    </div>
     @if(empty($data->original["data"]))
     <p>Ainda não existem produtos cadastrados</p>
     @else
