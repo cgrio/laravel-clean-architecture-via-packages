@@ -1,0 +1,12 @@
+{
+    "name": "{{VendorCaixaBaixa}}/{{PackageCaixaBaixa}}",
+    "description": "",
+    "authors": [
+        {
+            "name": "Alessandro Silva",
+            "email": "alessrio@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

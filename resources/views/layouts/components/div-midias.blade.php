@@ -1,0 +1,25 @@
+<div class="container div-scroll-horizontal">
+    <div class="row">
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/1.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/2.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/3.png'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/4.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/5.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/6.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/7.webp'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/9.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/10.webp'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/11.webp'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/12.webp'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/13.webp'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/14.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/15.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/16.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/18.webp'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/19.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/20.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/21.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/23.jpg'])
+          @include('layouts.components.card-midias',['imagem'=> '/img/anuncios/21.webp'])
+        </div>
+    </div>

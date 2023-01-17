@@ -1,0 +1,16 @@
+{
+    "name": "cgrio/crud",
+    "description": "Crud avan\u0000ado de Laravel",
+    "type": "project",
+    "require": {
+       
+    },
+    "license": "private",
+    "authors": [
+        {
+            "name": "cgrio",
+            "email": "alessrio@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

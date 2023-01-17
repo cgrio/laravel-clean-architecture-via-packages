@@ -1,0 +1,4 @@
+          <div class="form-group">
+              <label for="{{NomeCampoCaixaBaixa}}">{{__("{{NomeExibicaoCampo}}")}}</label>
+              <input type="text" class="form-control" name="{{NomeCampoCaixaBaixa}}"  value="{{ isset(${{ModeloNomeSingularCaixaBaixa}}) ? ${{ModeloNomeSingularCaixaBaixa}}->{{NomeCampoCaixaBaixa}}: old('{{NomeCampoCaixaBaixa}}') }}" />
+        <span id="error-{{NomeCampoCaixaBaixa}}" class="fade slow"></span>  </div>

@@ -1,0 +1,15 @@
+ <div class="form-group">
+              <label for="{{NomeCampoCaixaBaixa}}">{{__("{{NomeExibicaoCampo}}")}}</label>
+              @php
+                $selected = @old('{{NomeCampoCaixaBaixa}}', ${{ModeloNomeSingularCaixaBaixa}}->{{NomeCampoCaixaBaixa}});
+              @endphp
+              <select type="text" class="form-control" name="{{NomeCampoCaixaBaixa}}">
+              <option value=""></option>
+
+              @foreach(${{NomeCampoCaixaBaixa}}_opcoes as $m)
+              <option value="{{$m->id}}" {!! $selected == $m->id ?'selected="selected"':'' !!}>{{$m->titulo}}</option>
+
+              @endforeach
+              </select>
+              <span id="error-{{NomeCampoCaixaBaixa}}" class="fade slow"></span>
+          </div>

@@ -1,0 +1,6 @@
+                            <td>
+                                  <a href="javascript:ajaxLoad('{{url('/{{ModeloNomePluralCaixaBaixa}}?{{ModeloNomeSingularCaixaBaixa}}_field={{NomeCampoCaixaBaixa}}&{{ModeloNomeSingularCaixaBaixa}}_sort='.(request()->session()->get('sort')=='ASC'?'desc':'ASC'))}}','content')">
+                                    {{__('{{NomeExibicaoCampo}}')}}
+                                    </a>
+                                {{request()->session()->get('field')=='{{NomeCampoCaixaBaixa}}'?(request()->session()->get('sort')=='ASC'?'&#9652;':'&#9662;'):''}}
+                            </td>

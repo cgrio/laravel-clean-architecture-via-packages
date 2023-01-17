@@ -1,0 +1,81 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Create{{ModeloNomePluralCaixaAlta}}Table extends Migration
+{
+    public function up()
+    {
+        Schema::create('{{TabelaNome}}', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            //$table->bigInteger('votes')->nullable();
+            //$table->binary('data')->nullable();//guarda imagens ou arquivos
+            //$table->boolean('confirmed')->nullable();//bolean verdadeiro ou falso
+            //$table->char('name', 100)->comment('my comment')->nullable();
+            //$table->date('created_at')->nullable();
+            //$table->dateTime('created_at')->nullable();
+           //$table->dateTimeTz('created_at')->nullable();
+           //$table->decimal('amount', 8, 2);
+           //$table->double('amount', 8, 2);
+           //$table->enum('level', ['easy', 'hard']);
+           //$table->float('amount', 8, 2);
+           //$table->geometry('positions')->nullable();
+           //$table->geometryCollection('positions')->nullable();
+           //$table->increments('id')->nullable();
+           //$table->integer('votes')->nullable();
+           //$table->ipAddress('visitor')->nullable();
+           //$table->json('options')->nullable();
+           //$table->jsonb('options')->nullable();
+           //$table->lineString('positions')->nullable();
+           //$table->longText('description')->nullable();
+           //$table->macAddress('device')->nullable();
+           //$table->mediumIncrements('id')->nullable();
+           //$table->mediumInteger('votes')->nullable();
+           //$table->mediumText('description')->nullable();
+           //$table->morphs('taggable')->nullable();
+           //$table->multiLineString('positions')->nullable();
+           //$table->multiPoint('positions')->nullable();
+           //$table->multiPolygon('positions')->nullable();
+           //$table->nullableMorphs('taggable')->nullable();
+           //$table->nullableTimestamps();
+           //$table->point('position')->nullable();
+           //$table->polygon('positions')->nullable();
+           //$table->rememberToken();//varchar 100
+           //$table->set('flavors', ['strawberry', 'vanilla']);
+           //$table->smallIncrements('id')->nullable();
+           //$table->smallInteger('votes')->nullable();
+           //$table->softDeletes();
+           //$table->softDeletesTz();
+           //$table->string('name', 100);
+           //$table->text('description')->nullable();
+           //$table->time('sunrise')->nullable();
+           //$table->timeTz('sunrise')->nullable();
+           //$table->timestamp('added_on')->nullable();
+           //$table->timestampTz('added_on')->nullable();
+           //$table->timestamps();
+           //$table->timestampsTz();
+           //$table->tinyIncrements('id')->nullable();
+           //$table->tinyInteger('votes')->nullable();
+           //$table->unsignedBigInteger('votes')->nullable();
+           //$table->unsignedDecimal('amount', 8, 2);
+           //$table->unsignedInteger('votes')->nullable();
+           //$table->unsignedMediumInteger('votes')->nullable();
+           //$table->unsignedSmallInteger('votes')->nullable();
+           //$table->unsignedTinyInteger('votes')->nullable();
+           //$table->uuid('id')->nullable();
+           //$table->year('birth_year')->nullable();
+
+            $table->timestamps();
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+    }
+
+
+    public function down()
+    {
+     Schema::drop("{{TabelaNome}}");
+    }
+
+}

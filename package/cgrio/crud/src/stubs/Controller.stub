@@ -1,0 +1,133 @@
+<?php
+/*
+Author: Alessandro Silva <alessrio@gmail.com>
+*/
+namespace {{NameSpace}};
+
+use {{CaminhoModeloNameSpace}};
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class {{ModeloNomeSingularCaixaAlta}}Controller extends Controller
+{
+
+    public function __construct()
+    {
+        $this->middleware(['web', 'auth']);
+    }
+
+
+    public function index(Request $request)
+    {
+        $campos = [
+          {{CamposCaixaBaixa}}
+        ];
+    $pesquisa = [];
+    foreach($campos as $c){
+            $busca = $request->has('search_'.$c) ?
+                    $request->get('search_'.$c) : ($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_busca.'.$c) ? $request->session()->get('{{ModeloNomeSingularCaixaBaixa}}_busca.'.$c) : '');
+
+        if(!empty($busca)){
+            $pesquisa["$c"]=$busca;
+        }
+
+
+    }
+    if(!empty($pesquisa)){
+        $request->session()->put('{{ModeloNomeSingularCaixaBaixa}}_busca', $pesquisa);
+    }else{
+        request()->session()->forget("{{ModeloNomeSingularCaixaBaixa}}_busca");
+    }
+    ${{ModeloNomeSingularCaixaBaixa}}_field = $request->has('{{ModeloNomeSingularCaixaBaixa}}_field') ?
+                    $request->get('{{ModeloNomeSingularCaixaBaixa}}_field') : ($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_field') ? $request->session()->get('{{ModeloNomeSingularCaixaBaixa}}_field') : '');
+
+    ${{ModeloNomeSingularCaixaBaixa}}_sort = $request->has('{{ModeloNomeSingularCaixaBaixa}}_sort') ?
+                    $request->get('{{ModeloNomeSingularCaixaBaixa}}_sort') : ($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_sort') ? $request->session()->get('{{ModeloNomeSingularCaixaBaixa}}_sort') : 'ASC');
+
+    if(!empty(${{ModeloNomeSingularCaixaBaixa}}_field)){
+        $request->session()->put('{{ModeloNomeSingularCaixaBaixa}}_field', ${{ModeloNomeSingularCaixaBaixa}}_field);
+        $request->session()->put('{{ModeloNomeSingularCaixaBaixa}}_sort', ${{ModeloNomeSingularCaixaBaixa}}_sort);
+    }else{
+        request()->session()->forget("{{ModeloNomeSingularCaixaBaixa}}_field");
+        request()->session()->forget("{{ModeloNomeSingularCaixaBaixa}}_sort");
+    }
+
+    ${{ModeloNomePluralCaixaBaixa}} = new {{ModeloNomeSingularCaixaAlta}}();
+    if($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_busca') && !empty($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_busca'))){
+        foreach ($request->session()->get('{{ModeloNomeSingularCaixaBaixa}}_busca')  as $key => $value) {
+            ${{ModeloNomePluralCaixaBaixa}} =  ${{ModeloNomePluralCaixaBaixa}}->where($key,'like',"%$value%");
+        }
+    }
+    if($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_field') && !empty($request->session()->has('{{ModeloNomeSingularCaixaBaixa}}_field'))){
+        ${{ModeloNomePluralCaixaBaixa}} =  ${{ModeloNomePluralCaixaBaixa}}->orderBy(request()->session()->get("{{ModeloNomeSingularCaixaBaixa}}_field"), request()->session()->get("{{ModeloNomeSingularCaixaBaixa}}_sort"));
+    }
+    ${{ModeloNomePluralCaixaBaixa}} = ${{ModeloNomePluralCaixaBaixa}}->paginate(50);
+    return view('{{CaminhoView}}.index',compact('{{ModeloNomePluralCaixaBaixa}}'));
+    }
+
+
+    public function create()
+    {
+        return view('{{CaminhoView}}.create');
+    }
+
+    public function store()
+    {
+        $validacao = {{ModeloNomeSingularCaixaBaixa}}::VALIDACAO;
+        if(request()->ajax()){
+            $validator = Validator::make(request()->all(), $validacao);
+            if ($validator->fails())
+                return response()->json([
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                ]);
+                {{ModeloNomeSingularCaixaBaixa}}::create(request()->all());
+                return response()->json([
+                    'fail' => false,
+                    'reirect_url' => url('/{{ModeloNomePluralCaixaBaixa}}')
+                ]);
+        }else{
+        request()->validate($validacao);
+        {{ModeloNomeSingularCaixaBaixa}}::create(request()->all());
+        return Redirect::to('/{{ModeloNomePluralCaixaBaixa}}')
+       ->with('success','{{ModeloNomeSingularCaixaAlta}} '.__('criado com sucesso'));
+        }
+    }
+
+
+    public function show($id)
+    {
+        ${{ModeloNomeSingularCaixaBaixa}} = {{ModeloNomeSingularCaixaAlta}}::findOrFail($id);
+        return view('{{CaminhoView}}.show', compact('{{ModeloNomeSingularCaixaBaixa}}'));
+    }
+
+    public function edit($id)
+    {
+    ${{ModeloNomeSingularCaixaBaixa}} = {{ModeloNomeSingularCaixaAlta}}::findOrFail($id);
+        return view('{{CaminhoView}}.editar', compact('{{ModeloNomeSingularCaixaBaixa}}'));
+    }
+
+
+    public function update({{ModeloNomeSingularCaixaAlta}} ${{ModeloNomeSingularCaixaBaixa}})
+    {
+        $validacao = {{ModeloNomeSingularCaixaBaixa}}::VALIDACAO;
+        request()->validate($validacao);
+        {{ModeloNomeSingularCaixaAlta}}::whereId(${{ModeloNomeSingularCaixaBaixa}}->id)->update(request()->except(['_token','_method']));
+        return redirect('/{{ModeloNomePluralCaixaBaixa}}')->with('success', __('{{ModeloNomeSingularCaixaAlta}} atualizado com sucesso'));
+    }
+
+
+    public function destroy($id)
+    {
+        ${{ModeloNomeSingularCaixaBaixa}} = {{ModeloNomeSingularCaixaAlta}}::findOrFail($id);
+        ${{ModeloNomeSingularCaixaBaixa}}->delete();
+        return redirect('/{{ModeloNomePluralCaixaBaixa}}')->with('success', __('{{ModeloNomeSingularCaixaAlta}} apagado com sucesso'));
+    }
+
+    public function limpar_busca(){
+        request()->session()->forget("{{ModeloNomeSingularCaixaBaixa}}_busca");
+         return redirect()->route('{{ModeloNomePluralCaixaBaixa}}.index');
+    }
+}

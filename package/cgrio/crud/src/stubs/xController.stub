@@ -1,0 +1,171 @@
+<?php
+namespace App\Http\Controllers;
+
+use App\{{Modelo}};
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class {{Modelo}}xController extends Controller
+{
+    public function indexx(Request $request)
+    {
+        $request->session()->put('search', $request->has('search') ? $request->get('search') : ($request->session()->has('search') ? $request->session()->get('search') : ''));
+        $request->session()->put('conteudo', $request->has('conteudo') ? $request->get('conteudo') : ($request->session()->has('conteudo') ? $request->session()->get('conteudo') : -1));
+        $request->session()->put('field', $request->has('field') ? $request->get('field') : ($request->session()->has('field') ? $request->session()->get('field') : 'created_at'));
+        $request->session()->put('sort', $request->has('sort') ? $request->get('sort') : ($request->session()->has('sort') ? $request->session()->get('sort') : 'desc'));
+        ${{ModeloSingularCaixaBaixa}} = new {{Modelo}}();
+        if ($request->session()->get('conteudo') != -1)
+            ${{ModeloSingularCaixaBaixa}} = ${{ModeloSingularCaixaBaixa}}->where('conteudo', $request->session()->get('conteudo'));
+        ${{ModeloSingularCaixaBaixa}} = ${{ModeloSingularCaixaBaixa}}->where('titulo', 'like', '%' . $request->session()->get('search') . '%')
+            ->orderBy($request->session()->get('field'), $request->session()->get('sort'))
+            ->paginate(5);
+        if ($request->ajax())
+            return view('{{ModeloSingularCaixaBaixa}}x.index', compact('{{ModeloSingularCaixaBaixa}}'));
+        else
+            return view('{{ModeloSingularCaixaBaixa}}x.ajax', compact('{{ModeloSingularCaixaBaixa}}'));
+    }
+
+    public function createx(Request $request)
+    {
+        if ($request->isMethod('get'))
+            return view('{{ModeloSingularCaixaBaixa}}x.form');
+        else {
+            $rules = [
+                'titulo' => 'required',
+                'conteudo' => 'required',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails())
+                return response()->json([
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                ]);
+            ${{ModeloSingularCaixaBaixa}} = new {{Modelo}}($request->all());
+
+            ${{ModeloSingularCaixaBaixa}}->save();
+            return response()->json([
+                'fail' => false,
+                'redirect_url' => url('{{ModeloSingularCaixaBaixa}}x')
+            ]);
+        }
+    }
+
+    public function deletex($id)
+    {
+        {{Modelo}}::destroy($id);
+        return redirect('/{{ModeloSingularCaixaBaixa}}x');
+    }
+
+    public function updatex(Request $request, $id)
+    {
+        if ($request->isMethod('get'))
+            return view('{{ModeloSingularCaixaBaixa}}x.form', ['pagina' => {{Modelo}}::find($id)]);
+        else {
+            $rules = [
+                'titulo' => 'required',
+                'email' => 'required|email',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails())
+                return response()->json([
+                    'fail' => true,
+                    'errors' => $validator->errors()
+                ]);
+            ${{ModeloSingularCaixaBaixa}} = {{Modelo}}::find($id);
+            ${{ModeloSingularCaixaBaixa}}->titulo = $request->titulo;
+            ${{ModeloSingularCaixaBaixa}}->conteudo = $request->conteudo;
+            ${{ModeloSingularCaixaBaixa}}->email = $request->email;
+            ${{ModeloSingularCaixaBaixa}}->save();
+            return response()->json([
+                'fail' => false,
+                'redirect_url' => url('{{ModeloSingularCaixaBaixa}}x')
+            ]);
+        }
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        ${{ModeloPluralCaixaBaixa}} = {{Modelo}}::all();
+        return view('index', compact('{{ModeloPluralCaixaBaixa}}'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('create');
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            '{{ModeloSingularCaixaBaixa}}_name' => 'required|max:255',
+            'isbn_no' => 'required|alpha_num',
+            '{{ModeloSingularCaixaBaixa}}_price' => 'required|numeric',
+        ]);
+        ${{ModeloSingularCaixaBaixa}} = {{Modelo}}::create($validatedData);
+        return redirect('/{{ModeloPluralCaixaBaixa}}')->with('success', '{{Modelo}} '.__('is successfully saved'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        ${{ModeloSingularCaixaBaixa}} = {{Modelo}}::findOrFail($id);
+        return view('edit', compact('{{ModeloSingularCaixaBaixa}}'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            '{{ModeloSingularCaixaBaixa}}_name' => 'required|max:255',
+            'isbn_no' => 'required|alpha_num',
+            '{{ModeloSingularCaixaBaixa}}_price' => 'required|numeric',
+        ]);
+        {{Modelo}}::whereId($id)->update($validatedData);
+        return redirect('/{{ModeloPluralCaixaBaixa}}')->with('success', '{{Modelo}} '.__('is successfully updated'));
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        ${{ModeloSingularCaixaBaixa}} = {{Modelo}}::findOrFail($id);
+        ${{ModeloSingularCaixaBaixa}}->delete();
+        return redirect('/{{ModeloPluralCaixaBaixa}}')->with('success', '{{Modelo}} '.__('is successfully deleted'));
+    }
+}

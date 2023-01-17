@@ -1,0 +1,11 @@
+.app-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.app-content div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -1,0 +1,20 @@
+<?php
+
+namespace {{NameSpace}};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{ModeloNome}} extends Model
+{
+Const VALIDACAO = [
+    {{Validacao}}
+];
+
+    protected $guarded = [{{CamposProtegidos}}];
+    protected $fillable=[{{CamposPreenchiveis}}];
+    # protected $table={{NomeTabela}};
+    # protected $primaryKey='id';
+
+
+
+}

@@ -1,0 +1,18 @@
+{
+"atributos":[
+{
+    "_id":1,
+    "nome":"nome",
+    "tipo":"string",
+    "tamanho": "9",
+    "casas_decimais":"0",
+    "obrigatorio":"1",
+    "aceita_nulo":"1",
+    "indexavel":"1",
+    "visivel_no_grid":"1",
+    "pesquisavel":"1",
+    "referencia_modelo":"",
+    "editavel":"0"
+}
+]
+}

@@ -1,0 +1,4 @@
+<?php
+//Auth::routes();
+
+//Route::resource('/rota', 'Vendor\Pacote\Controllers\Controller');
